@@ -1,5 +1,4 @@
-from flask import Flask, request, render_template, jsonify
-from datetime import datetime
+from flask import Flask, render_template, jsonify
 from random import shuffle
 
 
@@ -26,7 +25,7 @@ def api_transformers():
 
     shuffle(transformers)
 
-    return jsonify(transformers)
+    return jsonify(transformers)  # <-- Python object (list of dictionaries) converted to JSON
 
 if __name__ == '__main__':
     app.run()
