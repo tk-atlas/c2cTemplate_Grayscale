@@ -25,7 +25,13 @@ def api_transformers():
 
     shuffle(transformers)
 
-    return jsonify(transformers)  # <-- Python object (list of dictionaries) converted to JSON
+    # It's a good habit to return a dictionary in API responses so we can
+    # include other fields in the future: count, page_number, etc.
+    # If we returned the transformers list, there's no space if we need to
+    # add for more information.
+    api_response = { "results": transformers, "count": len(transformers) }
+
+    return jsonify(api_response)  # Python object (list of dictionaries) converted to JSON
 
 if __name__ == '__main__':
     app.run()

@@ -57,7 +57,7 @@ function getDataFromApi() {
             var apiData = document.getElementById("api_data");
             apiData.innerHTML = '';  // clear apiData
 
-            apiResponse.forEach(function(transformer) {
+            apiResponse.results.forEach(function(transformer) {
                 var card = document.createElement("div");
                 card.classList.add("card");
                 apiData.appendChild(card);
