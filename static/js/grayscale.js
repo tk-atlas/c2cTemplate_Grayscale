@@ -55,34 +55,10 @@ function getDataFromApi() {
             console.log(apiResponse);
 
             var apiData = document.getElementById("api_data");
-            apiData.innerHTML = '';  // clear apiData
+            apiData.innerHTML = '';  // clear apiData before adding cards
 
             apiResponse.results.forEach(function(transformer) {
-                var card = document.createElement("div");
-                card.classList.add("card");
-                apiData.appendChild(card);
-
-                var cardBody = document.createElement("div");
-                cardBody.classList.add("card-body");
-                card.appendChild(cardBody);
-
-                var cardTitle = document.createElement("h4");
-                cardTitle.classList.add("card-title");
-                var nameElement = document.createTextNode(transformer.name);
-                cardTitle.appendChild(nameElement);
-                cardBody.appendChild(cardTitle);
-
-                var heightP = document.createElement("p");
-                heightP.classList.add("card-text");
-                var heightElement = document.createTextNode("Height: " + transformer.height);
-                heightP.appendChild(heightElement);
-                cardBody.appendChild(heightP);
-
-                var cardImage = document.createElement("img");
-                cardImage.setAttribute("src", transformer.image_url);
-                cardImage.setAttribute("alt", transformer.name);
-                cardImage.classList.add("card-img-bottom");
-                card.appendChild(cardImage);
+                addCard(transformer);
             });
 
             status.innerText = '';
@@ -93,4 +69,33 @@ function getDataFromApi() {
         }
     };
     xhr.send();
+}
+
+
+function addCard(transformer) {
+    var apiData = document.getElementById("api_data");
+
+    var card = document.createElement("div");
+    card.classList.add("card");
+    apiData.appendChild(card);
+
+    var cardBody = document.createElement("div");
+    cardBody.classList.add("card-body");
+    card.appendChild(cardBody);
+
+    var cardTitle = document.createElement("h4");
+    cardTitle.classList.add("card-title");
+    cardTitle.textContent = transformer.name;
+    cardBody.appendChild(cardTitle);
+
+    var heightP = document.createElement("p");
+    heightP.classList.add("card-text");
+    heightP.textContent = "Height: " + transformer.height;
+    cardBody.appendChild(heightP);
+
+    var cardImage = document.createElement("img");
+    cardImage.setAttribute("src", transformer.image_url);
+    cardImage.setAttribute("alt", transformer.name);
+    cardImage.classList.add("card-img-bottom");
+    card.appendChild(cardImage);
 }
